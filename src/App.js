@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Author from './author.js';
+import Comment from './comment.js'
 import './App.css';
 
 class Post extends Component {
   render() {
+    const allPosts = this.props.posts.map(p =>{
+      return <div>
+        <h1 className="Title">{p.title} by {p.author}</h1>
+        <Author author={p.author}/>
+        <p className="Post-intro">
+          {p.content}
+        </p>
+        <h2>Comments</h2>
+        <Comment comments={p.comments}/>
+        <br />
+        <br />
+        </div>
+    });
     return (
       <div className="Post">
         <header className="Post-header">
@@ -13,12 +28,7 @@ class Post extends Component {
             All the latest and greatest things from 65 million years ago.
           </p>
         </header>
-        <h1 className="Title">{this.props.posts[0].title} by {this.props.posts[0].author}</h1>
-        <p className="Post-intro">
-          {this.props.posts[0].content}
-        </p>
-        <h2>Comments</h2>
-        {this.props.posts[0].comments[0]}
+        {allPosts}
         <hr />
         <p>Note, at this stage, we are only rendering ONE post with ONE comment!</p>
       </div>
